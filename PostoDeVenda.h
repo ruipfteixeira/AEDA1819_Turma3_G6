@@ -20,6 +20,9 @@ public:
 	vector<Bilhete> getBilhetes();
 	virtual void emiteBilhete(cat_zonas cat, tipo_bilh tip, string nome = "null", string esc = "null");
 	void printBilhetes();
+	int numeroBilhetes();
+	int numeroBilhetes(cat_zonas cat);
+	int numeroBilhetes(tipo_bilh tip);
 };
 
 class MaqAutomatica: public PostoDeVenda
