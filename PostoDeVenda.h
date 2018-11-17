@@ -23,6 +23,7 @@ public:
 	int numeroBilhetes();
 	int numeroBilhetes(cat_zonas cat);
 	int numeroBilhetes(tipo_bilh tip);
+	string getLocalizacao();
 };
 
 class MaqAutomatica: public PostoDeVenda

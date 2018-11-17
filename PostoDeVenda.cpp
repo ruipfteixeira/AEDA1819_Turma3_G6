@@ -149,4 +149,8 @@ void MaqAutomatica::emiteBilhete(cat_zonas cat, tipo_bilh tip)
 	bilhetes_emitidos.push_back(Bilhete(cat, tip));
 }
 
+string PostoDeVenda::getLocalizacao()
+{
+	return localizacao;
+}
 
