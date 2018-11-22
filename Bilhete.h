@@ -7,7 +7,7 @@
 using namespace std;
 
 typedef enum cat_zonas {z1 = 1, z2, z3, z4};
-typedef enum tipo_bilh {UNIC, DIAR, A_NORM, A_JUN, A_SEN, A_ESTUD};
+typedef enum tipo_bilh {UNIC = 1, DIAR, A_NORM, A_JUN, A_SEN, A_ESTUD};
 
 class Bilhete
 {
@@ -30,7 +30,7 @@ public:
 	void printBilhete();
 	int getCC();
 	int getIdade();
-	int* getData();
+	vector<int> getData();
 	bool operator< (const Bilhete & c) const;
 	bool operator> (const Bilhete & c) const;
 

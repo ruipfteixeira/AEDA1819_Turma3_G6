@@ -16,14 +16,15 @@ protected:
 
 public:
 	PostoDeVenda(string loc);
-	virtual ~PostoDeVenda();
+	virtual ~PostoDeVenda() {};
 	vector<Bilhete> getBilhetes();
 	virtual void emiteBilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes, int ano,  string nome = "null", int idade = -1, int CC = -1, string esc = "null");
-	void printBilhetes();
+	void printBilhetes(bool printPeriod);
 	int numeroBilhetes();
 	int numeroBilhetes(cat_zonas cat);
 	int numeroBilhetes(tipo_bilh tip);
 	string getLocalizacao();
+	void ordenaBilhetes();
 };
 
 class MaqAutomatica: public PostoDeVenda

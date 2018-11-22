@@ -1,8 +1,10 @@
 
 #include <iostream>
+#include <vector>
 #include "Bilhete.h"
 
-Bilhete::Bilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes, int ano, string nome = "null", int idade = -1, int CC = -1, string esc = "null")
+
+Bilhete::Bilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes, int ano, string nome, int idade, int, string esc)
 {
 	categoria = cat;
 	tipo = tip;
@@ -173,9 +175,9 @@ int Bilhete::getIdade()
 	return idade;
 }
 
-int* Bilhete::getData()
+vector<int> Bilhete::getData()
 {
-	int data[3];
+	vector<int> data;
 	data[0] = dia;
 	data[1] = mes;
 	data[2] = ano;

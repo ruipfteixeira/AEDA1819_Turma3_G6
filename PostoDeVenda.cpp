@@ -1,5 +1,7 @@
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 #include "PostoDeVenda.h"
 
 PostoDeVenda::PostoDeVenda(string loc): localizacao(loc)
@@ -10,12 +12,12 @@ vector<Bilhete> PostoDeVenda::getBilhetes()
 	return bilhetes_emitidos;
 }
 
-void PostoDeVenda::emiteBilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes, int ano,  string nome = "null", int idade = -1, int CC = -1, string esc = "null")
+void PostoDeVenda::emiteBilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes, int ano,  string nome, int idade, int CC, string esc)
 {
 	bilhetes_emitidos.push_back(Bilhete(cat, tip, dia, mes, ano, nome, idade, CC, esc));
 }
 
-void PostoDeVenda::printBilhetes()
+void PostoDeVenda::printBilhetes(bool printPeriod)
 {
 	if(bilhetes_emitidos.size() == 0)
 	{
@@ -23,9 +25,63 @@ void PostoDeVenda::printBilhetes()
 	}
 	else
 	{
-		for(size_t i = 0; i < bilhetes_emitidos.size(); i++)
+		if(!printPeriod)
 		{
-			bilhetes_emitidos.at(i).printBilhete();
+			for(size_t i = 0; i < bilhetes_emitidos.size(); i++)
+			{
+				bilhetes_emitidos.at(i).printBilhete();
+				std::cout << std::endl;
+			}
+		}
+		else
+		{
+			vector<int> dataBilh, data1, data2;
+			std::cout << "Insira duas datas no formato 'DD MM AAAA'" << std::endl;
+			std::cin >> data1[0] >> data1[1] >> data1[2];
+			std::cin >> data2[0] >> data2[1] >> data2[2];
+			for(size_t i = 0; i < bilhetes_emitidos.size(); i++)
+			{
+				dataBilh = bilhetes_emitidos.at(i).getData();
+
+				if(dataBilh[2] > data1[2] && dataBilh[2] < data2[2])
+				{
+					bilhetes_emitidos.at(i).printBilhete();
+					std::cout << std::endl;
+				}
+				else if(dataBilh[2] == data1[2])
+				{
+					if(dataBilh[1] > data1[1])
+					{
+						bilhetes_emitidos.at(i).printBilhete();
+						std::cout << std::endl;
+					}
+					else if(dataBilh[1] == data1[1])
+					{
+						if(dataBilh[0] >= data1[0])
+						{
+							bilhetes_emitidos.at(i).printBilhete();
+							std::cout << std::endl;
+						}
+					}
+				}
+				else if(dataBilh[2] == data2[2])
+				{
+					if(dataBilh[1] < data2[1])
+					{
+						bilhetes_emitidos.at(i).printBilhete();
+						std::cout << std::endl;
+					}
+					else if(dataBilh[1] == data2[1])
+					{
+						if(dataBilh[0] <= data2[0])
+						{
+							bilhetes_emitidos.at(i).printBilhete();
+							std::cout << std::endl;
+						}
+					}
+				}
+			}
+
 		}
 	}
 }
@@ -136,13 +192,13 @@ int PostoDeVenda::numeroBilhetes(tipo_bilh tip)
 			for(size_t i = 0; i < bilhetes_emitidos.size(); i++)
 			{
 				if(bilhetes_emitidos.at(i).getTipo() == tipo)
-				{count++}
+				{count++;}
 			}
 			return count;
 		}
 }
 
-MaqAutomatica::MaqAutomatica(string loc): localizacao(loc){}
+MaqAutomatica::MaqAutomatica(string loc): PostoDeVenda::PostoDeVenda(loc) {}
 
 void MaqAutomatica::emiteBilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes, int ano)
 {
@@ -152,5 +208,10 @@ void MaqAutomatica::emiteBilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes,
 string PostoDeVenda::getLocalizacao()
 {
 	return localizacao;
+}
+
+void PostoDeVenda::ordenaBilhetes()
+{
+	sort(bilhetes_emitidos.begin(), bilhetes_emitidos.end());
 }
 
