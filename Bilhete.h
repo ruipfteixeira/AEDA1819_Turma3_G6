@@ -17,14 +17,12 @@ protected:
 	string escola;
 	string nome;
 	int CC, idade;
-	//bool validado;
+	int dia, mes, ano;
 
 public:
-	Bilhete(cat_zonas cat, tipo_bilh tip, string nome = "null", string esc = "null");
+	Bilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes, int ano,  string nome = "null", int idade = -1, int CC = -1, string esc = "null");
 	//virtual ~Bilhete() {};
-	//bool eValido();
 	string getCategoria();
-	//virtual int validaBilhete();
 	string getTipo();
 	double getPreco();
 	string getEscola();
@@ -32,56 +30,11 @@ public:
 	void printBilhete();
 	int getCC();
 	int getIdade();
-};
-/*
-class Ocasional: public Bilhete
-{
-	string tipo;
-	int duracao;
-	//referencia local emissao?
-
-public:
-	Ocasional(string cat, string tipo);
-	int validaBilhete();
-	int getPreco();
+	int* getData();
+	bool operator< (const Bilhete & c) const;
+	bool operator> (const Bilhete & c) const;
 
 };
 
-class Assinatura: public Bilhete
-{
-protected:
-	string nome;
-
-public:
-	Assinatura(string nome, string cat);
-	string getNome();
-	virtual int getPreco();
-	int validaBilhete();
-
-};
-
-class JuniorOuSenior: public Assinatura
-{
-protected:
-	int idade;
-	int CC;
-
-public:
-	JuniorOuSenior(string nome, string cat, int idade, int CC);
-	int getIdade();
-	int getCC();
-	int getPreco();
-};
-
-class Estudante: public JuniorOuSenior
-{
-protected:
-	string escola;
-
-public:
-	Estudante(string nome, string cat, int idade, int CC, string escola);
-	string getEscola();
-};
-*/
 
 #endif /* SRC_BILHETE_H_ */

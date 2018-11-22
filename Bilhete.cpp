@@ -2,19 +2,19 @@
 #include <iostream>
 #include "Bilhete.h"
 
-Bilhete::Bilhete(cat_zonas cat, tipo_bilh tip, string nome = "null", string esc = "null")
+Bilhete::Bilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes, int ano, string nome = "null", int idade = -1, int CC = -1, string esc = "null")
 {
 	categoria = cat;
 	tipo = tip;
+	this->dia = dia;
+	this->mes = mes;
+	this->ano = ano;
 	this->nome = nome;
+	this->idade = idade;
+	this->CC = CC;
 	escola = esc;
 }
-/*
-bool Bilhete::eValido()
-{
-	return validado;
-}
-*/
+
 
 string Bilhete::getCategoria()
 {
@@ -146,6 +146,7 @@ void Bilhete::printBilhete()
 {
 	std::cout << "categoria: " << this->getCategoria() << std::endl;
 	std::cout << "tipo: " << this->getTipo() << std::endl;
+	std::cout << "data: " << dia << "/" << mes << "/" << ano << std::endl;
 	if(tipo >= A_NORM)
 	{
 		std::cout << "nome: " << nome << std::endl;
@@ -172,89 +173,84 @@ int Bilhete::getIdade()
 	return idade;
 }
 
-/*
-virtual int Bilhete::validaBilhete()
+int* Bilhete::getData()
 {
-	validado = true;
-	return 0;
+	int data[3];
+	data[0] = dia;
+	data[1] = mes;
+	data[2] = ano;
+	return data;
 }
 
-Ocasional::Ocasional(string cat, string tipo): Bilhete(cat)
+bool Bilhete::operator< (const Bilhete & c) const
 {
-	this->tipo = tipo;
-	if(tipo == "unico")
-		duracao = 2;
-	if(tipo == "diario")
-		duracao = 24;
+	if(ano < c.ano)
+		return true;
+	else if(ano > c.ano)
+		return false;
+	else
+	{
+		if(mes < c.mes)
+			return true;
+		else if(mes > c.mes)
+			return false;
+		else
+		{
+			if(dia < c.dia)
+				return true;
+			else if(dia > c.dia)
+				return false;
+			else
+			{
+				if(tipo <  c.tipo)
+					return true;
+				else if(tipo > c.tipo)
+					return false;
+				else
+				{
+					if(categoria < c.categoria)
+						return true;
+					else
+						return false;
+				}
+			}
+		}
+	}
 }
 
-int Ocasional::validaBilhete()
+bool Bilhete::operator> (const Bilhete & c) const
 {
-	validado = true;
-	return duracao;
+	if(ano > c.ano)
+		return true;
+	else if(ano < c.ano)
+		return false;
+	else
+	{
+		if(mes > c.mes)
+			return true;
+		else if(mes < c.mes)
+			return false;
+		else
+		{
+			if(dia > c.dia)
+				return true;
+			else if(dia < c.dia)
+				return false;
+			else
+			{
+				if(tipo >  c.tipo)
+					return true;
+				else if(tipo < c.tipo)
+					return false;
+				else
+				{
+					if(categoria > c.categoria)
+						return true;
+					else
+						return false;
+				}
+			}
+		}
+	}
 }
 
-int Ocasional::getPreco()
-{
-	int preco = 0;
-	//definir preço consoante categoria e tipo
-	return preco;
-}
-
-Assinatura::Assinatura(string nome, string cat): Bilhete(cat)
-{
-	this->nome = nome;
-}
-
-string Assinatura::getNome()
-{
-	return nome;
-}
-
-int Assinatura::validaBilhete()
-{
-	validado = true;
-	return 0; //a alterar
-}
-
-virtual int Assinatura::getPreco()
-{
-	int preco = 0;
-	//definir preço consoante categoria
-	return preco;
-}
-
-JuniorOuSenior::JuniorOuSenior(string nome, string cat, int idade, int CC): Assinatura(nome, cat)
-{
-	this->idade = idade;
-	this->CC = CC;
-}
-
-int JuniorOuSenior::getIdade()
-{
-	return idade;
-}
-
-int JuniorOuSenior::getCC()
-{
-	return CC;
-}
-
-int JuniorOuSenior::getPreco()
-{
-	int preco = 0;
-	//definir preço consoante categoria
-	preco = preco * 0.75;
-	return preco;
-}
-
-Estudante::Estudante(string nome, string cat, int idade, int CC, string escola): JuniorOuSenior(nome, cat, idade, CC)
-{
-	this->escola = escola;
-}
-
-string Estudante::getEscola()
-{
-	return escola;
-}
-*/

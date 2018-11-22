@@ -10,9 +10,9 @@ vector<Bilhete> PostoDeVenda::getBilhetes()
 	return bilhetes_emitidos;
 }
 
-void PostoDeVenda::emiteBilhete(cat_zonas cat, tipo_bilh tip, string nome = "null", string esc = "null")
+void PostoDeVenda::emiteBilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes, int ano,  string nome = "null", int idade = -1, int CC = -1, string esc = "null")
 {
-	bilhetes_emitidos.push_back(Bilhete(cat, tip, nome, esc));
+	bilhetes_emitidos.push_back(Bilhete(cat, tip, dia, mes, ano, nome, idade, CC, esc));
 }
 
 void PostoDeVenda::printBilhetes()
@@ -144,9 +144,9 @@ int PostoDeVenda::numeroBilhetes(tipo_bilh tip)
 
 MaqAutomatica::MaqAutomatica(string loc): localizacao(loc){}
 
-void MaqAutomatica::emiteBilhete(cat_zonas cat, tipo_bilh tip)
+void MaqAutomatica::emiteBilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes, int ano)
 {
-	bilhetes_emitidos.push_back(Bilhete(cat, tip));
+	bilhetes_emitidos.push_back(Bilhete(cat, tip, dia, mes, ano));
 }
 
 string PostoDeVenda::getLocalizacao()
