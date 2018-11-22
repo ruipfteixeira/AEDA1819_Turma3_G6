@@ -168,6 +168,94 @@ void procuraPosto(vector <PostoDeVenda> *postos, vector <MaqAutomatica> *maquina
 }
 
 
+
+
+
+
+void addBilhete() {
+	cat_zonas zone;
+	string zona;
+	tipo_bilh tip;
+	string tip0;
+	string tip1;
+	string name;
+	string esc;
+	int Ccidadao;
+	int age;
+
+	std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<" << std::endl;
+	std::cout << "  Para comprar bilhete único, escreva 1           " << std::endl;
+	std::cout << "  Para comprar bilhete diario, escreva 2          " << std::endl;
+	std::cout << "  Para comprar assinatura, escreva 3              " << std::endl;
+	std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<" << std::endl << std::endl;
+	std::cin >> tip0;
+	std::cout << std::endl << std::endl;
+
+	if (tip0 == "1") { tip = UNIC;}
+	if (tip0 == "2") { tip = DIAR;}
+	if (tip0 == "3") {
+		std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl;
+		std::cout << "          Escolha uma assinatura:           "	<< std::endl;
+		std::cout << "     Normal, Junior, Senior, Estudante      " << std::endl;
+		std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl << std::endl;
+		std::cin >> tip1;
+
+		if (tip1 == "Normal"){ tip = A_NORM;}
+		if (tip1 == "Junior"){ tip = A_JUN;}
+		if (tip1 == "Senior"){ tip = A_SEN;}
+		if (tip1 == "Estudante"){ tip = A_ESTUD;}
+	}
+
+	std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl;
+	std::cout << "             Escolha uma zona:              "	<< std::endl;
+	std::cout << "               1 , 2 , 3 , 4                "	<< std::endl;
+	std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl << std::endl;
+	std::cin >> zona;
+	std::cout << std::endl << std::endl;
+
+	if (zona == "1") { zone = z1;}
+	if (zona == "2") { zone = z2;}
+	if (zona == "3") { zone = z3;}
+	if (zona == "4") { zone = z4;}
+
+	std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl;
+	std::cout << "             Indique o seu Nome             "	<< std::endl;
+	std::cout << "                                            "	<< std::endl;
+	std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl << std::endl;
+	std::cin >> name;
+	std::cout << std::endl << std::endl;
+
+	if (tip1 != "Normal"){
+		std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl;
+		std::cout << "       Indique o seu Cartao de Cidadao      "	<< std::endl;
+		std::cout << "                                            "	<< std::endl;
+		std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl << std::endl;
+		std::cin >> Ccidadao;
+		std::cout << std::endl << std::endl;
+
+		std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl;
+		std::cout << "             Indique a sua Idade            "	<< std::endl;
+		std::cout << "                                            "	<< std::endl;
+		std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl << std::endl;
+		std::cin >> age;
+		std::cout << std::endl << std::endl;
+
+		if (tip1 == "Estudante") {
+			std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl;
+			std::cout << "            Indique a sua Escola            "	<< std::endl;
+			std::cout << "                                            "	<< std::endl;
+			std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl << std::endl;
+			std::cin >> esc;
+			std::cout << std::endl << std::endl;
+		}
+	}
+
+	// Vetor de Bilhetes  |add|  Bilhete(zone, tip, name, esc, Ccidadao, age);
+}
+
+
+
+
 void mainMenu()
 {
 	char option;
