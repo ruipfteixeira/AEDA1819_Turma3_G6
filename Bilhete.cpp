@@ -178,9 +178,9 @@ int Bilhete::getIdade()
 vector<int> Bilhete::getData()
 {
 	vector<int> data;
-	data[0] = dia;
-	data[1] = mes;
-	data[2] = ano;
+	data.push_back(dia);
+	data.push_back(mes);
+	data.push_back(ano);
 	return data;
 }
 

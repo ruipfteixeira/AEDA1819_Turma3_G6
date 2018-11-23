@@ -35,45 +35,46 @@ void PostoDeVenda::printBilhetes(bool printPeriod)
 		}
 		else
 		{
-			vector<int> dataBilh, data1, data2;
+			vector<int> dataBilh = {0, 0, 0}, data1 = {0, 0, 0}, data2 = {0, 0, 0};
 			std::cout << "Insira duas datas no formato 'DD MM AAAA'" << std::endl;
-			std::cin >> data1[0] >> data1[1] >> data1[2];
-			std::cin >> data2[0] >> data2[1] >> data2[2];
+			std::cin >> data1.at(0) >> data1.at(1) >> data1.at(2);
+			std::cin >> data2.at(0) >> data2.at(1) >> data2.at(2);
+			std::cout << data1.at(0) << " " << data1.at(1) << " " << data1.at(2) << " " << data1.at(0) << " " << data2.at(1) << " " << data2.at(2) << std::endl;
 			for(size_t i = 0; i < bilhetes_emitidos.size(); i++)
 			{
 				dataBilh = bilhetes_emitidos.at(i).getData();
 
-				if(dataBilh[2] > data1[2] && dataBilh[2] < data2[2])
+				if(dataBilh.at(2) > data1.at(2) && dataBilh.at(2) < data2.at(2))
 				{
 					bilhetes_emitidos.at(i).printBilhete();
 					std::cout << std::endl;
 				}
-				else if(dataBilh[2] == data1[2])
+				else if(dataBilh.at(2) == data1.at(2))
 				{
-					if(dataBilh[1] > data1[1])
+					if(dataBilh.at(1) > data1.at(1))
 					{
 						bilhetes_emitidos.at(i).printBilhete();
 						std::cout << std::endl;
 					}
-					else if(dataBilh[1] == data1[1])
+					else if(dataBilh.at(1) == data1.at(1))
 					{
-						if(dataBilh[0] >= data1[0])
+						if(dataBilh.at(0) >= data1.at(0))
 						{
 							bilhetes_emitidos.at(i).printBilhete();
 							std::cout << std::endl;
 						}
 					}
 				}
-				else if(dataBilh[2] == data2[2])
+				else if(dataBilh.at(2) == data2.at(2))
 				{
-					if(dataBilh[1] < data2[1])
+					if(dataBilh.at(1) < data2.at(1))
 					{
 						bilhetes_emitidos.at(i).printBilhete();
 						std::cout << std::endl;
 					}
-					else if(dataBilh[1] == data2[1])
+					else if(dataBilh.at(1) == data2.at(1))
 					{
-						if(dataBilh[0] <= data2[0])
+						if(dataBilh.at(0) <= data2.at(0))
 						{
 							bilhetes_emitidos.at(i).printBilhete();
 							std::cout << std::endl;
@@ -81,6 +82,7 @@ void PostoDeVenda::printBilhetes(bool printPeriod)
 					}
 				}
 			}
+			std::cout << "end of loop" << std::endl;
 
 		}
 	}

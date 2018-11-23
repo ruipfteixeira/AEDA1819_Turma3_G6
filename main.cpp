@@ -74,7 +74,8 @@ void addBilhetePosto(PostoDeVenda *posto) {
 		std::cout << "             Indique o seu Nome             "	<< std::endl;
 		std::cout << "                                            "	<< std::endl;
 		std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl << std::endl;
-		std::cin >> name;
+		std::cin.ignore();
+		getline(std::cin, name);
 		std::cout << std::endl << std::endl;
 
 		if (tip1 != "Normal"){
@@ -97,7 +98,8 @@ void addBilhetePosto(PostoDeVenda *posto) {
 			std::cout << "            Indique a sua Escola            "	<< std::endl;
 			std::cout << "                                            "	<< std::endl;
 			std::cout << ">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<" << std::endl << std::endl;
-			std::cin >> esc;
+			std::cin.ignore();
+			getline(std::cin, esc);
 			std::cout << std::endl << std::endl;
 			posto->emiteBilhete(zone, tip, dia, mes, ano, name, age, Ccidadao, esc);
 			}
@@ -173,15 +175,16 @@ void operaPosto(int index, vector<PostoDeVenda> *postos)
 				std::cout << "Para adicionar um bilhete escreva 'a'." << std::endl;
 				std::cout << "Para ver os bilhetes vendidos escreva 'b'." << std::endl;
 				std::cout << "Para ordenar or bilhetes vendidos escreva 'o'." << std::endl;
+				std::cout << "Para ver o número de bilhetes vendidos escreva 'n'." << std::endl;
 				std::cout << "Para voltar ao menu anterior escreva 'v'." << std::endl;
 				std::cin >> option;
 
-				if(option != 'a' && option != 'b' && option != 'o' && option != 'v')
+				if(option != 'a' && option != 'b' && option != 'o' && option != 'n' && option != 'v')
 				{throw OpcaoInvalida();}
 				progress = true;
 			}
 
-			catch(OpcaoInvalida *)
+			catch(OpcaoInvalida)
 			{
 				std::cout << "Inseriu uma opção inválida, por favor tente outra vez." << std::endl;
 				progress = false;
@@ -212,6 +215,91 @@ void operaPosto(int index, vector<PostoDeVenda> *postos)
 			postos->at(index).ordenaBilhetes();
 			break;
 		}
+		case 'n':
+		{
+			std::cout << "Para contar bilhetes de uma zona especifica escreva 'z'." << std::endl;
+			std::cout << "Para contar bilhetes de uma categoria especifica escreva 'c'." << std::endl;
+			std::cout << "Para contar todos os bilhetes prima qualquer outra tecla." << std::endl;
+			std::cin >> printOpt;
+			if(printOpt == 'z')
+			{
+				cat_zonas zona;
+				int tempZona;
+				std::cout << "Escreva o número da zona que pretende contar." << std::endl;
+				std::cin >> tempZona;
+				if(tempZona == 1)
+				{
+					zona = z1;
+					std::cout << "Foram vendidos " << postos->at(index).numeroBilhetes(zona) << " bilhetes desta zona." << std::endl;
+				}
+				else if(tempZona == 2)
+				{
+					zona = z2;
+					std::cout << "Foram vendidos " << postos->at(index).numeroBilhetes(zona) << " bilhetes desta zona." << std::endl;
+				}
+				else if(tempZona == 3)
+				{
+					zona = z3;
+					std::cout << "Foram vendidos " << postos->at(index).numeroBilhetes(zona) << " bilhetes desta zona." << std::endl;
+				}
+				else if(tempZona == 4)
+				{
+					zona = z4;
+					std::cout << "Foram vendidos " << postos->at(index).numeroBilhetes(zona) << " bilhetes desta zona." << std::endl;
+				}
+				else
+				{
+					std::cout << "Zona inválida." << std::endl;
+				}
+			}
+			else if(printOpt == 'c')
+			{
+				tipo_bilh tipo;
+				int tempTipo;
+				std::cout << "Escreva o número respetivo à categoria que pretende contar." << std::endl;
+				std::cout << "(único -> 1, diario -> 2, normal -> 3, junior -> 4, senior -> 5, estudante -> 6)" << std::endl;
+				std::cin >> tempTipo;
+				if(tempTipo == 1)
+				{
+					tipo = UNIC;
+					std::cout << "Foram vendidos " << postos->at(index).numeroBilhetes(tipo) << " bilhetes deste tipo." << std::endl;
+				}
+				else if(tempTipo == 2)
+				{
+					tipo = DIAR;
+					std::cout << "Foram vendidos " << postos->at(index).numeroBilhetes(tipo) << " bilhetes deste tipo." << std::endl;
+				}
+				else if(tempTipo == 3)
+				{
+					tipo = A_NORM;
+					std::cout << "Foram vendidos " << postos->at(index).numeroBilhetes(tipo) << " bilhetes deste tipo." << std::endl;
+				}
+				else if(tempTipo == 4)
+				{
+					tipo = A_JUN;
+					std::cout << "Foram vendidos " << postos->at(index).numeroBilhetes(tipo) << " bilhetes deste tipo." << std::endl;
+				}
+				else if(tempTipo == 5)
+				{
+					tipo = A_SEN;
+					std::cout << "Foram vendidos " << postos->at(index).numeroBilhetes(tipo) << " bilhetes deste tipo." << std::endl;
+				}
+				else if(tempTipo == 6)
+				{
+					tipo = A_ESTUD;
+					std::cout << "Foram vendidos " << postos->at(index).numeroBilhetes(tipo) << " bilhetes deste tipo." << std::endl;
+				}
+				else
+				{
+					std::cout << "Tipo inválido." << std::endl;
+				}
+			}
+			else
+			{
+				std::cout << "Foram vendidos " << postos->at(index).numeroBilhetes() << " bilhetes." << std::endl;
+			}
+			break;
+		}
 		case 'v':
 		{
 			exit = true;
@@ -240,15 +328,16 @@ void operaMaquina(int index, vector<MaqAutomatica> *maquinas)
 				std::cout << "Para adicionar um bilhete escreva 'a'." << std::endl;
 				std::cout << "Para ver os bilhetes vendidos escreva 'b'." << std::endl;
 				std::cout << "Para ordenar or bilhetes vendidos escreva 'o'." << std::endl;
+				std::cout << "Para ver o número de bilhetes vendidos escreva 'n'." << std::endl;
 				std::cout << "Para voltar ao menu anterior escreva 'v'." << std::endl;
 				std::cin >> option;
 
-				if(option != 'a' && option != 'b' && option != 'o' && option != 'v')
+				if(option != 'a' && option != 'b' && option != 'o' && option != 'n' && option != 'v')
 				{throw OpcaoInvalida();}
 				progress = true;
 			}
 
-			catch(OpcaoInvalida *)
+			catch(OpcaoInvalida)
 			{
 				std::cout << "Inseriu uma opção inválida, por favor tente outra vez." << std::endl;
 				progress = false;
@@ -277,6 +366,71 @@ void operaMaquina(int index, vector<MaqAutomatica> *maquinas)
 		case 'o':
 		{
 			maquinas->at(index).ordenaBilhetes();
+			break;
+		}
+		case 'n':
+		{
+			std::cout << "Para contar bilhetes de uma zona especifica escreva 'z'." << std::endl;
+			std::cout << "Para contar bilhetes de uma categoria especifica escreva 'c'." << std::endl;
+			std::cout << "Para contar todos os bilhetes prima qualquer outra tecla." << std::endl;
+			std::cin >> printOpt;
+			if(printOpt == 'z')
+			{
+				cat_zonas zona;
+				int tempZona;
+				std::cout << "Escreva o número da zona que pretende contar." << std::endl;
+				std::cin >> tempZona;
+				if(tempZona == 1)
+				{
+					zona = z1;
+					std::cout << "Foram vendidos " << maquinas->at(index).numeroBilhetes(zona) << " bilhetes desta zona." << std::endl;
+				}
+				else if(tempZona == 2)
+				{
+					zona = z2;
+					std::cout << "Foram vendidos " << maquinas->at(index).numeroBilhetes(zona) << " bilhetes desta zona." << std::endl;
+				}
+				else if(tempZona == 3)
+				{
+					zona = z3;
+					std::cout << "Foram vendidos " << maquinas->at(index).numeroBilhetes(zona) << " bilhetes desta zona." << std::endl;
+				}
+				else if(tempZona == 4)
+				{
+					zona = z4;
+					std::cout << "Foram vendidos " << maquinas->at(index).numeroBilhetes(zona) << " bilhetes desta zona." << std::endl;
+				}
+				else
+				{
+					std::cout << "Zona inválida." << std::endl;
+				}
+			}
+			else if(printOpt == 'c')
+			{
+				tipo_bilh tipo;
+				int tempTipo;
+				std::cout << "Escreva o número respetivo à categoria que pretende contar." << std::endl;
+				std::cout << "(único -> 1, diario -> 2)" << std::endl;
+				std::cin >> tempTipo;
+				if(tempTipo == 1)
+				{
+					tipo = UNIC;
+					std::cout << "Foram vendidos " << maquinas->at(index).numeroBilhetes(tipo) << " bilhetes deste tipo." << std::endl;
+				}
+				else if(tempTipo == 2)
+				{
+					tipo = DIAR;
+					std::cout << "Foram vendidos " << maquinas->at(index).numeroBilhetes(tipo) << " bilhetes deste tipo." << std::endl;
+				}
+				else
+				{
+					std::cout << "Tipo inválido." << std::endl;
+				}
+			}
+			else
+			{
+				std::cout << "Foram vendidos " << maquinas->at(index).numeroBilhetes() << " bilhetes." << std::endl;
+			}
 			break;
 		}
 		case 'v':
@@ -327,7 +481,7 @@ void adicionaPostos(vector <PostoDeVenda> *postos, vector <MaqAutomatica> *maqui
 				progress = true;
 			}
 
-			catch(OpcaoInvalida *)
+			catch(OpcaoInvalida)
 			{
 				std::cout << "Inseriu uma opção inválida, por favor tente outra vez." << std::endl;
 				progress = false;
@@ -388,7 +542,7 @@ void procuraPosto(vector <PostoDeVenda> *postos, vector <MaqAutomatica> *maquina
 				progress = true;
 			}
 
-			catch(OpcaoInvalida *)
+			catch(OpcaoInvalida)
 			{
 				std::cout << "Inseriu uma opção inválida, por favor tente outra vez." << std::endl;
 				progress = false;
@@ -477,7 +631,7 @@ void mainMenu()
 				progress = true;
 			}
 
-			catch(OpcaoInvalida *)
+			catch(OpcaoInvalida)
 			{
 				std::cout << "Inseriu uma opção inválida, por favor tente outra vez." << std::endl;
 				progress = false;
