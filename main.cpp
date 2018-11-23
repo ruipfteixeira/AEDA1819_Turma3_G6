@@ -112,7 +112,6 @@ void addBilhetePosto(PostoDeVenda *posto) {
 	else
 		posto->emiteBilhete(zone, tip, dia, mes, ano);
 
-	// Vetor de Bilhetes  |add|  Bilhete(zone, tip, name, esc, Ccidadao, age);
 }
 
 

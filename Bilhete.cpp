@@ -184,6 +184,11 @@ vector<int> Bilhete::getData()
 	return data;
 }
 
+string Bilhete::getDataString(){
+	string data = to_string(dia) + "/" + to_string(mes) + "/" + to_string(ano);
+	return data;
+}
+
 bool Bilhete::operator< (const Bilhete & c) const
 {
 	if(ano < c.ano)

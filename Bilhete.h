@@ -31,6 +31,7 @@ public:
 	int getCC();
 	int getIdade();
 	vector<int> getData();
+	string getDataString();
 	bool operator< (const Bilhete & c) const;
 	bool operator> (const Bilhete & c) const;
 

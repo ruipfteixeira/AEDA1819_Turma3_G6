@@ -25,6 +25,8 @@ public:
 	int numeroBilhetes(tipo_bilh tip);
 	string getLocalizacao();
 	void ordenaBilhetes();
+	void ImportSaveFile(string ficheiro);
+	void ExportSaveFile(string ficheiro);
 };
 
 class MaqAutomatica: public PostoDeVenda
