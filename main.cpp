@@ -8,6 +8,11 @@
 #include <vector>
 #include <string>
 #include "PostoDeVenda.h"
+#include <fstream>
+#include <sstream>
+
+vector <PostoDeVenda> postos;
+vector <MaqAutomatica> maquinas;
 
 class OpcaoInvalida{};
 
@@ -596,6 +601,300 @@ void procuraPosto(vector <PostoDeVenda> *postos, vector <MaqAutomatica> *maquina
 
 
 
+// Cria um ficheiro com a localizacao e bilhetes de cada posto de venda e de cada maquina. O formato e do tipo:
+// . localizacao posto 1
+// bilhete 1
+// bilhete 2
+// (...)
+// . localicazao posto 2
+// (..)
+// %             (usado para separar postos de maquinas uma unica vez)
+// . localicazao maquina 1
+// bilhete 1
+// (...)
+//
+//
+// Tem como input o nome do ficheiro onde guardara a informacao. A informacao do bilhete e toda processada de forma a estar toda contida na string linha.
+
+
+void ExportSaveFile(string ficheiro){
+	string linha;
+	ofstream File(ficheiro);
+
+	// postos
+	for(unsigned int iP = 0; iP < postos.size(); iP++){
+	 	 if(File.is_open()){
+	 		 File << postos.at(iP).getLocalizacao();
+	 		 File << "\n";
+		 }
+	 for(unsigned int i1 = 0; i1 < postos.at(iP).getBilhetes().size(); i1++){
+		 string zona = (postos.at(iP).getBilhetes().at(i1).getCategoria());
+		 string tipo = (postos.at(iP).getBilhetes().at(i1).getTipo());
+		 string data = (postos.at(iP).getBilhetes().at(i1).getDataString());
+		 string name = (postos.at(iP).getBilhetes().at(i1).getNome());
+		 string age = to_string((postos.at(iP).getBilhetes().at(i1).getIdade()));
+		 string CCidadao = to_string((postos.at(iP).getBilhetes().at(i1).getCC()));
+		 string school = (postos.at(iP).getBilhetes().at(i1).getEscola());
+		 linha = zona + "|" + tipo + "|" + data + "|" + name + "|" + age + "|" + CCidadao + "|" + school + "|";
+
+	 	 if(File.is_open()){
+	 	 File << linha;
+		 File << "\n";
+		 }
+	 }
+
+	}
+
+	 if(File.is_open()){
+		 File << "%";
+		 File << "\n";
+	 }
+
+ 	 // maquinas
+
+ 	for(unsigned int iP = 0; iP < maquinas.size(); iP++){
+ 	 	 if(File.is_open()){
+ 	 		 File << maquinas.at(iP).getLocalizacao();
+ 	 		 File << "\n";
+ 		 }
+ 	 for(unsigned int i1 = 0; i1 < maquinas.at(iP).getBilhetes().size(); i1++){
+ 		 string zona = (maquinas.at(iP).getBilhetes().at(i1).getCategoria());
+ 		 string tipo = (maquinas.at(iP).getBilhetes().at(i1).getTipo());
+ 		 string data = (maquinas.at(iP).getBilhetes().at(i1).getDataString());
+ 		 linha = zona + "|" + tipo + "|" + data + "|";
+
+ 	 	 if(File.is_open()){
+ 	 	 File << linha;
+ 		 File << "\n";
+ 		 }
+ 	 }
+
+	}
+	File.close();
+}
+
+
+
+// Le um ficheiro e converte a informacao de localizacao/bilhetes dos postos/maquinas.
+// Tem como input o nome do ficheiro de onde le a informacao.
+// Descodifica cada um dos passos usados para guardar e cria novos vetores de postos/maquinas.
+
+
+void ImportSaveFile(string ficheiro){
+	string linha;
+	string info;
+	ifstream File(ficheiro);
+	int counter = 0;
+	int counterPosto = -1;
+	int counterMaquina = -1;
+
+	string location;
+	cat_zonas zone;
+	tipo_bilh tip;
+	string name;
+	string esc;
+	int Ccidadao;
+	int age;
+	int day, month, year;
+	vector<Bilhete> listabilhetes;
+
+	postos.clear();
+	maquinas.clear();
+	bool PostoMaquina = true; // true = posto | false = maquina
+
+	if(File.is_open()){
+		while(getline(File,linha)){
+			bool local = true;
+			for(unsigned int c = 0; c < linha.size(); ++c) {
+				if (linha[c] == '|') {
+					local = false;
+				}
+				if (linha[c] == '%'){
+					local = false;
+					PostoMaquina = false;
+				}
+			}
+
+			if (local && PostoMaquina){
+				location = linha;
+				postos.push_back(PostoDeVenda(location));
+				counterPosto++;
+			}
+
+			if (local && (!PostoMaquina)){
+				location = linha;
+				maquinas.push_back(MaqAutomatica(location));
+				counterMaquina++;
+			}
+
+
+			if(PostoMaquina  && (!local)){
+			 for(unsigned int i = 0; i < linha.size(); ++i) {
+			    if (linha[i] == '|'){
+			    	switch (counter){
+
+			    	case 0:{
+			    		if(info == "z1"){ zone = z1;}
+			    		if(info == "z2"){ zone = z2;}
+			    		if(info == "z3"){ zone = z3;}
+			    		if(info == "z4"){ zone = z4;}
+			    		break;
+			    	}
+
+			    	case 1:{
+			    		if(info == "unico"){tip = UNIC;}
+			    		if(info == "diario"){tip = DIAR;}
+			    		if(info == "assinatura normal"){tip = A_NORM;}
+			    		if(info == "assinatura junior"){tip = A_JUN;}
+			    		if(info == "assinatura senior"){tip = A_SEN;}
+			    		if(info == "assinatura estudante"){tip = A_ESTUD;}
+			    		break;
+			    	}
+
+			    	case 2:{
+			    		string info2;
+			    		int counter2 = 0;
+			    		for(unsigned int i2 = 0; i2 < info.size(); ++i2) {
+			    			if (info[i] == '|'){
+
+			    				if(counter2 == 0){day = stoi(info2);}
+			    				if(counter2 == 1){month = stoi(info2);}
+
+			    				info2.clear();
+			    				counter2++;
+			    			}
+
+			    			else{
+						    	stringstream ss2;
+						    	string s2;
+						    	char c2 = info[i];
+						    	ss2 << c2;
+						    	ss2 >> s2;
+						    	info2 = info2 + s2;
+			    			}
+			    		}
+			    		year = stoi(info2);
+			    		info2.clear();
+			    		break;
+			    	}
+
+			    	case 3:{
+			    		name = info;
+			    		break;
+			    	}
+
+			    	case 4:{
+			    		age = stoi(info);
+			    		break;
+			    	}
+
+			    	case 5:{
+			    		Ccidadao = stoi(info);
+			    		break;
+			    	}
+
+			    	case 6:{
+			    		esc = info;
+			    		break;
+			    	}
+
+			    	}
+
+			    	counter++;
+			    	info.clear();
+			    }
+
+			    else{
+			    	stringstream ss;
+			    	string s;
+			    	char c = linha[i];
+			    	ss << c;
+			    	ss >> s;
+			    	info = info + s;
+			    }
+			 }
+			 postos.at(counterPosto).emiteBilhete(zone,tip,day,month,year,name,age,Ccidadao,esc);
+			}
+
+
+			if((!PostoMaquina)  && (!local)){
+			 for(unsigned int i = 0; i < linha.size(); ++i) {
+			    if (linha[i] == '|'){
+			    	switch (counter){
+
+			    	case 0:{
+			    		if(info == "z1"){ zone = z1;}
+			    		if(info == "z2"){ zone = z2;}
+			    		if(info == "z3"){ zone = z3;}
+			    		if(info == "z4"){ zone = z4;}
+			    		break;
+			    	}
+
+			    	case 1:{
+			    		if(info == "unico"){tip = UNIC;}
+			    		if(info == "diario"){tip = DIAR;}
+			    		if(info == "assinatura normal"){tip = A_NORM;}
+			    		if(info == "assinatura junior"){tip = A_JUN;}
+			    		if(info == "assinatura senior"){tip = A_SEN;}
+			    		if(info == "assinatura estudante"){tip = A_ESTUD;}
+			    		break;
+			    	}
+
+			    	case 2:{
+			    		string info2;
+			    		int counter2 = 0;
+			    		for(unsigned int i2 = 0; i2 < info.size(); ++i2) {
+			    			if (info[i] == '|'){
+
+			    				if(counter2 == 0){day = stoi(info2);}
+			    				if(counter2 == 1){month = stoi(info2);}
+
+			    				info2.clear();
+			    				counter2++;
+			    			}
+
+			    			else{
+						    	stringstream ss2;
+						    	string s2;
+						    	char c2 = info[i];
+						    	ss2 << c2;
+						    	ss2 >> s2;
+						    	info2 = info2 + s2;
+			    			}
+			    		}
+			    		year = stoi(info2);
+			    		info2.clear();
+			    		break;
+			    	}
+
+			    	}
+
+			    	counter++;
+			    	info.clear();
+			    }
+
+			    else{
+			    	stringstream ss;
+			    	string s;
+			    	char c = linha[i];
+			    	ss << c;
+			    	ss >> s;
+			    	info = info + s;
+			    }
+			 }
+			 maquinas.at(counterMaquina).emiteBilhete(zone,tip,day,month,year);
+			}
+
+
+
+		}
+		File.close();
+	}
+}
+
+
+
+
 
 
 
@@ -606,13 +905,17 @@ void mainMenu()
 {
 	char option;
 	bool progress = false, exit = false;
-	vector <PostoDeVenda> postos;
-	vector <MaqAutomatica> maquinas;
-	std::cout << "Sistema de Registo de Bilhetes de Metro v1.0" << std::endl;
-	/*sistema de carregamento de ficheiros
+	std::cout << "Sistema de Registo de Bilhetes de Metro v(4*10^7).0" << std::endl;
+
 	std::cout << "Para carregar um ficheiro existente escreva 'c'. Para criar um novo escreva 'n'." << std::endl;
 	std::cin >> option;
-	*/
+
+	if(option == 'c'){
+		std::cout << "Indique o nome do ficheiro." << std::endl;
+		string savefileI;
+		cin >> savefileI;
+		ImportSaveFile(savefileI);
+	}
 	do
 	{
 		do
@@ -622,6 +925,7 @@ void mainMenu()
 				std::cout << std::endl << "Escolha uma opção:" << std::endl;
 				std::cout << "Para adicionar postos ou maquinas escreva 'a'." << std::endl;
 				std::cout << "Para procurar um posto ou maquina escreva 'p'." << std::endl;
+				std::cout << "Para guardar a informaçao escreva 'g'." << std::endl;
 				std::cout << "Para sair escreva 's'." << std::endl;
 				std::cin >> option;
 
@@ -647,6 +951,13 @@ void mainMenu()
 		case 'p':
 		{
 			procuraPosto(&postos, &maquinas);
+			break;
+		}
+		case 'g':{
+			std::cout << "Indique o nome do ficheiro." << std::endl;
+			string savefileE;
+			cin << savefileE;
+			ExportSaveFile(savefileE);
 			break;
 		}
 		case 's':
