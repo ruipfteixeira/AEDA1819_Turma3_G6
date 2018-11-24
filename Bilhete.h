@@ -91,6 +91,11 @@ public:
 	 */
 	vector<int> getData();
 	/**
+	* retorna a data na forma de uma string
+	* @return data numa string
+	*/
+	string getDataString();
+	/**
 	 * retorna true se o argumento da esquerda for menor cronologicamente que o da direita
 	 */
 	bool operator< (const Bilhete & c) const;
