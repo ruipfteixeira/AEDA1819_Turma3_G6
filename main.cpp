@@ -453,7 +453,7 @@ void operaMaquina(int index, vector<MaqAutomatica> *maquinas)
 template <class T>
 int vectorSearchPosto(string loc, vector<T> *postos)
 {
-	for(int i = 0; i < postos->size(); i++)
+	for(unsigned int i = 0; i < postos->size(); i++)
 	{
 		if(postos->at(i).getLocalizacao() == loc)
 		{
@@ -956,7 +956,7 @@ void mainMenu()
 		case 'g':{
 			std::cout << "Indique o nome do ficheiro." << std::endl;
 			string savefileE;
-			cin << savefileE;
+			cin >> savefileE;
 			ExportSaveFile(savefileE);
 			break;
 		}
