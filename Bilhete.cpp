@@ -69,22 +69,22 @@ string Bilhete::getTipo()
 	}
 	case A_NORM:
 	{
-		tip = "assinatura normal";
+		tip = "assinatura_normal";
 		break;
 	}
 	case A_JUN:
 	{
-		tip = "assinatura junior";
+		tip = "assinatura_junior";
 		break;
 	}
 	case A_SEN:
 	{
-		tip = "assinatura senior";
+		tip = "assinatura_senior";
 		break;
 	}
 	case A_ESTUD:
 	{
-		tip = "assinatura estudante";
+		tip = "assinatura_estudante";
 		break;
 	}
 	default:

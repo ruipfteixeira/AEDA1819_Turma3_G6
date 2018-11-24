@@ -650,7 +650,6 @@ void procuraPosto(vector <PostoDeVenda> *postos, vector <MaqAutomatica> *maquina
 //
 // Tem como input o nome do ficheiro onde guardara a informacao. A informacao do bilhete e toda processada de forma a estar toda contida na string linha.
 
-
 void ExportSaveFile(string ficheiro){
 	string linha;
 	ofstream File(ficheiro);
@@ -670,7 +669,7 @@ void ExportSaveFile(string ficheiro){
 		 string CCidadao = to_string((postos.at(iP).getBilhetes().at(i1).getCC()));
 		 string school = (postos.at(iP).getBilhetes().at(i1).getEscola());
 		 linha = zona + "|" + tipo + "|" + data + "|" + name + "|" + age + "|" + CCidadao + "|" + school + "|";
-
+		 zona.clear();tipo.clear();data.clear();name.clear();age.clear();CCidadao.clear();school.clear();
 	 	 if(File.is_open()){
 	 	 File << linha;
 		 File << "\n";
@@ -696,6 +695,7 @@ void ExportSaveFile(string ficheiro){
  		 string tipo = (maquinas.at(iP).getBilhetes().at(i1).getTipo());
  		 string data = (maquinas.at(iP).getBilhetes().at(i1).getDataString());
  		 linha = zona + "|" + tipo + "|" + data + "|";
+		 zona.clear();tipo.clear();data.clear();
 
  	 	 if(File.is_open()){
  	 	 File << linha;
@@ -739,6 +739,7 @@ void ImportSaveFile(string ficheiro){
 	if(File.is_open()){
 		while(getline(File,linha)){
 			bool local = true;
+			bool separator = false;
 			for(unsigned int c = 0; c < linha.size(); ++c) {
 				if (linha[c] == '|') {
 					local = false;
@@ -746,8 +747,11 @@ void ImportSaveFile(string ficheiro){
 				if (linha[c] == '%'){
 					local = false;
 					PostoMaquina = false;
+					separator = true;
 				}
 			}
+
+			cout << linha << endl;
 
 			if (local && PostoMaquina){
 				location = linha;
@@ -762,7 +766,7 @@ void ImportSaveFile(string ficheiro){
 			}
 
 
-			if(PostoMaquina  && (!local)){
+			if(PostoMaquina  && (!local) && (!separator)){
 			 for(unsigned int i = 0; i < linha.size(); ++i) {
 			    if (linha[i] == '|'){
 			    	switch (counter){
@@ -778,10 +782,10 @@ void ImportSaveFile(string ficheiro){
 			    	case 1:{
 			    		if(info == "unico"){tip = UNIC;}
 			    		if(info == "diario"){tip = DIAR;}
-			    		if(info == "assinatura normal"){tip = A_NORM;}
-			    		if(info == "assinatura junior"){tip = A_JUN;}
-			    		if(info == "assinatura senior"){tip = A_SEN;}
-			    		if(info == "assinatura estudante"){tip = A_ESTUD;}
+			    		if(info == "assinatura_normal"){tip = A_NORM;}
+			    		if(info == "assinatura_junior"){tip = A_JUN;}
+			    		if(info == "assinatura_senior"){tip = A_SEN;}
+			    		if(info == "assinatura_estudante"){tip = A_ESTUD;}
 			    		break;
 			    	}
 
@@ -789,7 +793,7 @@ void ImportSaveFile(string ficheiro){
 			    		string info2;
 			    		int counter2 = 0;
 			    		for(unsigned int i2 = 0; i2 < info.size(); ++i2) {
-			    			if (info[i] == '|'){
+			    			if (info[i2] == '/'){
 
 			    				if(counter2 == 0){day = stoi(info2);}
 			    				if(counter2 == 1){month = stoi(info2);}
@@ -797,11 +801,10 @@ void ImportSaveFile(string ficheiro){
 			    				info2.clear();
 			    				counter2++;
 			    			}
-
 			    			else{
 						    	stringstream ss2;
 						    	string s2;
-						    	char c2 = info[i];
+						    	char c2 = info[i2];
 						    	ss2 << c2;
 						    	ss2 >> s2;
 						    	info2 = info2 + s2;
@@ -832,6 +835,10 @@ void ImportSaveFile(string ficheiro){
 			    		break;
 			    	}
 
+			    	default: {
+			    		break;
+			    	}
+
 			    	}
 
 			    	counter++;
@@ -848,10 +855,11 @@ void ImportSaveFile(string ficheiro){
 			    }
 			 }
 			 postos.at(counterPosto).emiteBilhete(zone,tip,day,month,year,name,age,Ccidadao,esc);
+			 counter = 0;
 			}
 
 
-			if((!PostoMaquina)  && (!local)){
+			if((!PostoMaquina)  && (!local) && (!separator)){
 			 for(unsigned int i = 0; i < linha.size(); ++i) {
 			    if (linha[i] == '|'){
 			    	switch (counter){
@@ -867,10 +875,6 @@ void ImportSaveFile(string ficheiro){
 			    	case 1:{
 			    		if(info == "unico"){tip = UNIC;}
 			    		if(info == "diario"){tip = DIAR;}
-			    		if(info == "assinatura normal"){tip = A_NORM;}
-			    		if(info == "assinatura junior"){tip = A_JUN;}
-			    		if(info == "assinatura senior"){tip = A_SEN;}
-			    		if(info == "assinatura estudante"){tip = A_ESTUD;}
 			    		break;
 			    	}
 
@@ -878,7 +882,7 @@ void ImportSaveFile(string ficheiro){
 			    		string info2;
 			    		int counter2 = 0;
 			    		for(unsigned int i2 = 0; i2 < info.size(); ++i2) {
-			    			if (info[i] == '|'){
+			    			if (info[i2] == '/'){
 
 			    				if(counter2 == 0){day = stoi(info2);}
 			    				if(counter2 == 1){month = stoi(info2);}
@@ -890,7 +894,7 @@ void ImportSaveFile(string ficheiro){
 			    			else{
 						    	stringstream ss2;
 						    	string s2;
-						    	char c2 = info[i];
+						    	char c2 = info[i2];
 						    	ss2 << c2;
 						    	ss2 >> s2;
 						    	info2 = info2 + s2;
@@ -900,6 +904,8 @@ void ImportSaveFile(string ficheiro){
 			    		info2.clear();
 			    		break;
 			    	}
+
+			    	default: {break;}
 
 			    	}
 
@@ -917,20 +923,13 @@ void ImportSaveFile(string ficheiro){
 			    }
 			 }
 			 maquinas.at(counterMaquina).emiteBilhete(zone,tip,day,month,year);
+			 counter = 0;
 			}
-
-
 
 		}
 		File.close();
 	}
 }
-
-
-
-
-
-
 
 
 
@@ -966,7 +965,7 @@ void mainMenu()
 				std::cout << "Para sair escreva 's'." << std::endl;
 				std::cin >> option;
 
-				if(option != 'a' && option != 'p' && option != 's')
+				if(option != 'a' && option != 'p' && option != 'g' && option != 's')
 				{throw OpcaoInvalida();}
 				progress = true;
 			}
