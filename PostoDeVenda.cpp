@@ -1,11 +1,8 @@
 
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <algorithm>
 #include "PostoDeVenda.h"
-#include <string>
-#include <sstream>
 
 PostoDeVenda::PostoDeVenda(string loc): localizacao(loc)
 {}
@@ -219,19 +216,4 @@ void PostoDeVenda::ordenaBilhetes()
 {
 	sort(bilhetes_emitidos.begin(), bilhetes_emitidos.end());
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -1,0 +1,243 @@
+\hypertarget{class_bilhete}{}\section{Bilhete Class Reference}
+\label{class_bilhete}\index{Bilhete@{Bilhete}}
+
+
+{\ttfamily \#include $<$Bilhete.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bilhete_a474406ccf54268b9206c936be473a15d}{Bilhete}} (cat\+\_\+zonas cat, tipo\+\_\+bilh tip, int \mbox{\hyperlink{class_bilhete_ad3dbd72118947c8ebb9d2a1a9e6bc3eb}{dia}}, int \mbox{\hyperlink{class_bilhete_ad654ce2fb56eca0738e6994774bb9d75}{mes}}, int \mbox{\hyperlink{class_bilhete_a28c57c28b91d9d751cb8292911af4b00}{ano}}, string \mbox{\hyperlink{class_bilhete_a6c473f8854c6980af895803cfe742279}{nome}}=\char`\"{}null\char`\"{}, int \mbox{\hyperlink{class_bilhete_a5cd410905c9eeb3e0281df97ddc6b69a}{idade}}=-\/1, int \mbox{\hyperlink{class_bilhete_a3272957b6efbae819c70320b40823e46}{CC}}=-\/1, string esc=\char`\"{}null\char`\"{})
+\item 
+string \mbox{\hyperlink{class_bilhete_ab10b04a33753b9b0f5091bb5e6f12a20}{get\+Categoria}} ()
+\item 
+string \mbox{\hyperlink{class_bilhete_a454736f9880f0ee44e53cca1e894df7d}{get\+Tipo}} ()
+\item 
+double \mbox{\hyperlink{class_bilhete_af8800b8f21428964d446d2cb0747e9d8}{get\+Preco}} ()
+\item 
+string \mbox{\hyperlink{class_bilhete_adf630342c192da168a75e6bc983d7801}{get\+Escola}} ()
+\item 
+string \mbox{\hyperlink{class_bilhete_acd970616a71c2eaf21b0d616a7a5f7aa}{get\+Nome}} ()
+\item 
+void \mbox{\hyperlink{class_bilhete_abae0b23c34a8538b91ea5dbd70606525}{print\+Bilhete}} ()
+\item 
+int \mbox{\hyperlink{class_bilhete_a328c577511937f1ab79d9e785dd18564}{get\+CC}} ()
+\item 
+int \mbox{\hyperlink{class_bilhete_aa63d79d55516bdb158ffc9e8abaff93c}{get\+Idade}} ()
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{class_bilhete_a89a41aff919d6acb173acc708367f2d3}{get\+Data}} ()
+\item 
+bool \mbox{\hyperlink{class_bilhete_a09be5c8b845201431c4e96cc6e441f11}{operator$<$}} (const \mbox{\hyperlink{class_bilhete}{Bilhete}} \&c) const
+\item 
+bool \mbox{\hyperlink{class_bilhete_a3fb340596c0ab30945a1de6b691c842b}{operator$>$}} (const \mbox{\hyperlink{class_bilhete}{Bilhete}} \&c) const
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+cat\+\_\+zonas \mbox{\hyperlink{class_bilhete_a964746f80b1342fc53512073b5588c1a}{categoria}}
+\item 
+tipo\+\_\+bilh \mbox{\hyperlink{class_bilhete_a811d01c91c9ca7e43ca05b4de7cb053d}{tipo}}
+\item 
+string \mbox{\hyperlink{class_bilhete_a5129f08ea3f4b9ec1c77be2b5377c32f}{escola}}
+\item 
+string \mbox{\hyperlink{class_bilhete_a6c473f8854c6980af895803cfe742279}{nome}}
+\item 
+int \mbox{\hyperlink{class_bilhete_a3272957b6efbae819c70320b40823e46}{CC}}
+\item 
+int \mbox{\hyperlink{class_bilhete_a5cd410905c9eeb3e0281df97ddc6b69a}{idade}}
+\item 
+int \mbox{\hyperlink{class_bilhete_ad3dbd72118947c8ebb9d2a1a9e6bc3eb}{dia}}
+\item 
+int \mbox{\hyperlink{class_bilhete_ad654ce2fb56eca0738e6994774bb9d75}{mes}}
+\item 
+int \mbox{\hyperlink{class_bilhete_a28c57c28b91d9d751cb8292911af4b00}{ano}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+class \mbox{\hyperlink{class_bilhete}{Bilhete}} representa um bilhete de metro emitido, independentemente do tipo e zona 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_bilhete_a474406ccf54268b9206c936be473a15d}\label{class_bilhete_a474406ccf54268b9206c936be473a15d}} 
+\index{Bilhete@{Bilhete}!Bilhete@{Bilhete}}
+\index{Bilhete@{Bilhete}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{Bilhete()}{Bilhete()}}
+{\footnotesize\ttfamily Bilhete\+::\+Bilhete (\begin{DoxyParamCaption}\item[{cat\+\_\+zonas}]{cat,  }\item[{tipo\+\_\+bilh}]{tip,  }\item[{int}]{dia,  }\item[{int}]{mes,  }\item[{int}]{ano,  }\item[{string}]{nome = {\ttfamily \char`\"{}null\char`\"{}},  }\item[{int}]{idade = {\ttfamily -\/1},  }\item[{int}]{CC = {\ttfamily -\/1},  }\item[{string}]{esc = {\ttfamily \char`\"{}null\char`\"{}} }\end{DoxyParamCaption})}
+
+construtor da class \mbox{\hyperlink{class_bilhete}{Bilhete}} 
+\begin{DoxyParams}{Parameters}
+{\em cat} & zona do bilhete \\
+\hline
+{\em tip} & tipo do bilhete \\
+\hline
+{\em dia} & dia de emissao do bilhete \\
+\hline
+{\em mes} & mes de emissao do bilhete \\
+\hline
+{\em ano} & ano de emissao do bilhete \\
+\hline
+{\em nome} & nome do comprador do bilhete (apenas para assinaturas) \\
+\hline
+{\em idade} & idade do comprador do bilhete (apenas para assinaturas junior, senior e estudante) \\
+\hline
+{\em CC} & numero do cartao de cidadao do comprador do bilhete (apenas para assinaturas junior, senior e estudante) \\
+\hline
+{\em esc} & escola do comprador do bilhete (apenas para assinaturas estudante) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_bilhete_ab10b04a33753b9b0f5091bb5e6f12a20}\label{class_bilhete_ab10b04a33753b9b0f5091bb5e6f12a20}} 
+\index{Bilhete@{Bilhete}!get\+Categoria@{get\+Categoria}}
+\index{get\+Categoria@{get\+Categoria}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{get\+Categoria()}{getCategoria()}}
+{\footnotesize\ttfamily string Bilhete\+::get\+Categoria (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+retorna a zona do bilhete \begin{DoxyReturn}{Returns}
+zona do bilhete 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bilhete_a328c577511937f1ab79d9e785dd18564}\label{class_bilhete_a328c577511937f1ab79d9e785dd18564}} 
+\index{Bilhete@{Bilhete}!get\+CC@{get\+CC}}
+\index{get\+CC@{get\+CC}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{get\+C\+C()}{getCC()}}
+{\footnotesize\ttfamily int Bilhete\+::get\+CC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+retorna o numero do CC do comprador do bilhete \begin{DoxyReturn}{Returns}
+numero do CC do comprador do bilhete 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bilhete_a89a41aff919d6acb173acc708367f2d3}\label{class_bilhete_a89a41aff919d6acb173acc708367f2d3}} 
+\index{Bilhete@{Bilhete}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{get\+Data()}{getData()}}
+{\footnotesize\ttfamily vector$<$ int $>$ Bilhete\+::get\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+retorna a data de emissao do bilhete \begin{DoxyReturn}{Returns}
+vector que contem a data de emissao do bilhete na forma \{DD,MM,A\+A\+AA\} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bilhete_adf630342c192da168a75e6bc983d7801}\label{class_bilhete_adf630342c192da168a75e6bc983d7801}} 
+\index{Bilhete@{Bilhete}!get\+Escola@{get\+Escola}}
+\index{get\+Escola@{get\+Escola}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{get\+Escola()}{getEscola()}}
+{\footnotesize\ttfamily string Bilhete\+::get\+Escola (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+retorna a escola do comprador do bilhete \begin{DoxyReturn}{Returns}
+escola do comprador do bilhete 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bilhete_aa63d79d55516bdb158ffc9e8abaff93c}\label{class_bilhete_aa63d79d55516bdb158ffc9e8abaff93c}} 
+\index{Bilhete@{Bilhete}!get\+Idade@{get\+Idade}}
+\index{get\+Idade@{get\+Idade}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{get\+Idade()}{getIdade()}}
+{\footnotesize\ttfamily int Bilhete\+::get\+Idade (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+retorna a idade do comprador do bilhete \begin{DoxyReturn}{Returns}
+idade do comprador do bilhete 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bilhete_acd970616a71c2eaf21b0d616a7a5f7aa}\label{class_bilhete_acd970616a71c2eaf21b0d616a7a5f7aa}} 
+\index{Bilhete@{Bilhete}!get\+Nome@{get\+Nome}}
+\index{get\+Nome@{get\+Nome}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{get\+Nome()}{getNome()}}
+{\footnotesize\ttfamily string Bilhete\+::get\+Nome (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+retorna o nome do comprador do bilhete \begin{DoxyReturn}{Returns}
+nome do comprador do bilhete 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bilhete_af8800b8f21428964d446d2cb0747e9d8}\label{class_bilhete_af8800b8f21428964d446d2cb0747e9d8}} 
+\index{Bilhete@{Bilhete}!get\+Preco@{get\+Preco}}
+\index{get\+Preco@{get\+Preco}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{get\+Preco()}{getPreco()}}
+{\footnotesize\ttfamily double Bilhete\+::get\+Preco (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+retorna o preco do bilhete \begin{DoxyReturn}{Returns}
+preco do bilhete 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bilhete_a454736f9880f0ee44e53cca1e894df7d}\label{class_bilhete_a454736f9880f0ee44e53cca1e894df7d}} 
+\index{Bilhete@{Bilhete}!get\+Tipo@{get\+Tipo}}
+\index{get\+Tipo@{get\+Tipo}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{get\+Tipo()}{getTipo()}}
+{\footnotesize\ttfamily string Bilhete\+::get\+Tipo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+retorna o tipo do bilhete \begin{DoxyReturn}{Returns}
+tipo do bilhete 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bilhete_a09be5c8b845201431c4e96cc6e441f11}\label{class_bilhete_a09be5c8b845201431c4e96cc6e441f11}} 
+\index{Bilhete@{Bilhete}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Bilhete\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_bilhete}{Bilhete}} \&}]{c }\end{DoxyParamCaption}) const}
+
+retorna true se o argumento da esquerda for menor cronologicamente que o da direita \mbox{\Hypertarget{class_bilhete_a3fb340596c0ab30945a1de6b691c842b}\label{class_bilhete_a3fb340596c0ab30945a1de6b691c842b}} 
+\index{Bilhete@{Bilhete}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool Bilhete\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_bilhete}{Bilhete}} \&}]{c }\end{DoxyParamCaption}) const}
+
+retorna true se o argumento da esquerda for maior cronologicamente que o da direita \mbox{\Hypertarget{class_bilhete_abae0b23c34a8538b91ea5dbd70606525}\label{class_bilhete_abae0b23c34a8538b91ea5dbd70606525}} 
+\index{Bilhete@{Bilhete}!print\+Bilhete@{print\+Bilhete}}
+\index{print\+Bilhete@{print\+Bilhete}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{print\+Bilhete()}{printBilhete()}}
+{\footnotesize\ttfamily void Bilhete\+::print\+Bilhete (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+imprime no ecra todos os atributos do bilhete 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_bilhete_a28c57c28b91d9d751cb8292911af4b00}\label{class_bilhete_a28c57c28b91d9d751cb8292911af4b00}} 
+\index{Bilhete@{Bilhete}!ano@{ano}}
+\index{ano@{ano}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{ano}{ano}}
+{\footnotesize\ttfamily int Bilhete\+::ano\hspace{0.3cm}{\ttfamily [protected]}}
+
+ano de emissao do bilhete \mbox{\Hypertarget{class_bilhete_a964746f80b1342fc53512073b5588c1a}\label{class_bilhete_a964746f80b1342fc53512073b5588c1a}} 
+\index{Bilhete@{Bilhete}!categoria@{categoria}}
+\index{categoria@{categoria}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{categoria}{categoria}}
+{\footnotesize\ttfamily cat\+\_\+zonas Bilhete\+::categoria\hspace{0.3cm}{\ttfamily [protected]}}
+
+zona para a qual o bilhete foi comprado \mbox{\Hypertarget{class_bilhete_a3272957b6efbae819c70320b40823e46}\label{class_bilhete_a3272957b6efbae819c70320b40823e46}} 
+\index{Bilhete@{Bilhete}!CC@{CC}}
+\index{CC@{CC}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{CC}{CC}}
+{\footnotesize\ttfamily int Bilhete\+::\+CC\hspace{0.3cm}{\ttfamily [protected]}}
+
+numero do CC do assinante (-\/1 se o bilhete nao for assinatura junior, senior ou estudante) \mbox{\Hypertarget{class_bilhete_ad3dbd72118947c8ebb9d2a1a9e6bc3eb}\label{class_bilhete_ad3dbd72118947c8ebb9d2a1a9e6bc3eb}} 
+\index{Bilhete@{Bilhete}!dia@{dia}}
+\index{dia@{dia}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{dia}{dia}}
+{\footnotesize\ttfamily int Bilhete\+::dia\hspace{0.3cm}{\ttfamily [protected]}}
+
+$<$ dia de emissao do bilhete \mbox{\Hypertarget{class_bilhete_a5129f08ea3f4b9ec1c77be2b5377c32f}\label{class_bilhete_a5129f08ea3f4b9ec1c77be2b5377c32f}} 
+\index{Bilhete@{Bilhete}!escola@{escola}}
+\index{escola@{escola}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{escola}{escola}}
+{\footnotesize\ttfamily string Bilhete\+::escola\hspace{0.3cm}{\ttfamily [protected]}}
+
+escola do assinante ( \char`\"{}null\char`\"{} se o bilhete nao for do tipo assinatura estudante) \mbox{\Hypertarget{class_bilhete_a5cd410905c9eeb3e0281df97ddc6b69a}\label{class_bilhete_a5cd410905c9eeb3e0281df97ddc6b69a}} 
+\index{Bilhete@{Bilhete}!idade@{idade}}
+\index{idade@{idade}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{idade}{idade}}
+{\footnotesize\ttfamily int Bilhete\+::idade\hspace{0.3cm}{\ttfamily [protected]}}
+
+idade do assinante (-\/1 se o bilhete nao for assinatura junior, senior ou estudante) \mbox{\Hypertarget{class_bilhete_ad654ce2fb56eca0738e6994774bb9d75}\label{class_bilhete_ad654ce2fb56eca0738e6994774bb9d75}} 
+\index{Bilhete@{Bilhete}!mes@{mes}}
+\index{mes@{mes}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{mes}{mes}}
+{\footnotesize\ttfamily int Bilhete\+::mes\hspace{0.3cm}{\ttfamily [protected]}}
+
+$<$ mes de emissao do bilhete \mbox{\Hypertarget{class_bilhete_a6c473f8854c6980af895803cfe742279}\label{class_bilhete_a6c473f8854c6980af895803cfe742279}} 
+\index{Bilhete@{Bilhete}!nome@{nome}}
+\index{nome@{nome}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{nome}{nome}}
+{\footnotesize\ttfamily string Bilhete\+::nome\hspace{0.3cm}{\ttfamily [protected]}}
+
+nome do assinante (\char`\"{}null\char`\"{} se o bilhete nao for de um tipo assinatura) \mbox{\Hypertarget{class_bilhete_a811d01c91c9ca7e43ca05b4de7cb053d}\label{class_bilhete_a811d01c91c9ca7e43ca05b4de7cb053d}} 
+\index{Bilhete@{Bilhete}!tipo@{tipo}}
+\index{tipo@{tipo}!Bilhete@{Bilhete}}
+\subsubsection{\texorpdfstring{tipo}{tipo}}
+{\footnotesize\ttfamily tipo\+\_\+bilh Bilhete\+::tipo\hspace{0.3cm}{\ttfamily [protected]}}
+
+tipo do bilhete 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Moon\+\_\+\+Over\+\_\+\+Sun/\+A\+E\+D\+A1819\+\_\+\+Turma3\+\_\+\+G6/src/Bilhete.\+h\item 
+D\+:/\+Moon\+\_\+\+Over\+\_\+\+Sun/\+A\+E\+D\+A1819\+\_\+\+Turma3\+\_\+\+G6/src/Bilhete.\+cpp\end{DoxyCompactItemize}

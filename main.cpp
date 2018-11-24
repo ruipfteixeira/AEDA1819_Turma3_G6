@@ -14,10 +14,16 @@
 vector <PostoDeVenda> postos;
 vector <MaqAutomatica> maquinas;
 
+/**
+ * class excecao para inputs invalidos
+ */
 class OpcaoInvalida{};
 
 
-
+/**
+ * menu para adicionar um bilhete a um posto
+ * @param posto apontador para o posto de venda no qual se esta a tralbalhar
+ */
 void addBilhetePosto(PostoDeVenda *posto) {
 	cat_zonas zone;
 	string zona;
@@ -119,7 +125,10 @@ void addBilhetePosto(PostoDeVenda *posto) {
 
 }
 
-
+/**
+ * menu para adicionar um bilhete a um maquina
+ * @param posto apontador para a maquina na qual se esta a tralbalhar
+ */
 void addBilheteMaq(MaqAutomatica *maquina) {
 	cat_zonas zone;
 	string zona;
@@ -163,7 +172,11 @@ void addBilheteMaq(MaqAutomatica *maquina) {
 }
 
 
-
+/**
+ * menu para operar um posto
+ * @param index indice do posto atual no vetor de postos
+ * @param postos apontador para o vetor de postos atual
+ */
 void operaPosto(int index, vector<PostoDeVenda> *postos)
 {
 	char option, printOpt;
@@ -317,6 +330,11 @@ void operaPosto(int index, vector<PostoDeVenda> *postos)
 	}while(exit == false);
 }
 
+/**
+ * menu para operar uma maquina
+ * @param index indice da maquina atual no vetor de maquinas
+ * @param maquinas apontador para o vetor de maquinas atual
+ */
 void operaMaquina(int index, vector<MaqAutomatica> *maquinas)
 {
 	char option, printOpt;
@@ -450,6 +468,12 @@ void operaMaquina(int index, vector<MaqAutomatica> *maquinas)
 	}while(exit == false);
 }
 
+/**
+ * pesquisa um posto ou maquina num vetor de postos ou maquinas, respetivamente
+ * @param loc localizacao do posto ou maquina que se deseja procurar
+ * @param postos apontador para o vetor no qual se pretende procurar um posto ou maquina
+ * @return indice do posto ou maquina desejados no vetor (-1 se nao existir)
+ */
 template <class T>
 int vectorSearchPosto(string loc, vector<T> *postos)
 {
@@ -463,6 +487,11 @@ int vectorSearchPosto(string loc, vector<T> *postos)
 	return -1;
 }
 
+/**
+ * menu para adicionar um posto ou maquina ao respetivo vetor
+ * @param postos apontador para o vetor de postos atual
+ * @param maquinas apontador para o vetor de maquinas atual
+ */
 void adicionaPostos(vector <PostoDeVenda> *postos, vector <MaqAutomatica> *maquinas)
 {
 	char option;
@@ -523,6 +552,11 @@ void adicionaPostos(vector <PostoDeVenda> *postos, vector <MaqAutomatica> *maqui
 
 }
 
+/**
+ * menu para procurar um posto ou maquina no respetivo vetor (caso seja encontrado avanca para o menu para operar sobre este)
+ * @param postos apontador para o vetor de postos atual
+ * @param maquinas apontador para o vetor de maquinas atual
+ */
 void procuraPosto(vector <PostoDeVenda> *postos, vector <MaqAutomatica> *maquinas)
 {
 	char option;
@@ -901,6 +935,9 @@ void ImportSaveFile(string ficheiro){
 
 
 
+/**
+ * menu principal, no qual se pode carregar ou guardar um ficheiro e trabalhar na sessao atual
+ */
 void mainMenu()
 {
 	char option;

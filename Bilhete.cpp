@@ -4,7 +4,7 @@
 #include "Bilhete.h"
 
 
-Bilhete::Bilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes, int ano, string nome, int idade, int, string esc)
+Bilhete::Bilhete(cat_zonas cat, tipo_bilh tip, int dia, int mes, int ano, string nome, int idade, int CC, string esc)
 {
 	categoria = cat;
 	tipo = tip;
@@ -181,11 +181,6 @@ vector<int> Bilhete::getData()
 	data.push_back(dia);
 	data.push_back(mes);
 	data.push_back(ano);
-	return data;
-}
-
-string Bilhete::getDataString(){
-	string data = to_string(dia) + "/" + to_string(mes) + "/" + to_string(ano);
 	return data;
 }
 
