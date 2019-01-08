@@ -8,11 +8,17 @@
 #include <vector>
 #include <string>
 #include "PostoDeVenda.h"
+#include "Funcionario.h"
+#include "BST.h"
+#include "Composicao.h"
 #include <fstream>
 #include <sstream>
 
 vector <PostoDeVenda> postos;
 vector <MaqAutomatica> maquinas;
+Funcionario funcNotFound(0, "", NULL);
+BST<Funcionario> funcionarios(funcNotFound);
+priority_queue<Composicao> composicoes;
 
 /**
  * class excecao para inputs invalidos
@@ -931,7 +937,217 @@ void ImportSaveFile(string ficheiro){
 	}
 }
 
+void gereFuncionarios(vector <PostoDeVenda> *postos)
+{
+	char option;
+	bool progress = false, exit = false;
+	string nome, loc;
+	int index, salario;
+	do
+	{
+		do
+		{
+			try
+			{
+				std::cout << std::endl << "Escolha uma opção:" << std::endl;
+				std::cout << "Para adicionar um funcionario escreva 'a'." << std::endl;
+				std::cout << "Para remover um funcionario escreva 'r'." << std::endl;
+				std::cout << "Para imprimir a lista de Funcionarios escreva 'p'." << std::endl;
+				std::cout << "Para voltar ao menu inicial escreva 'v'." << std::endl;
+				std::cin >> option;
 
+				if(option != 'a' && option != 'r' && option != 'p' && option != 'v')
+				{throw OpcaoInvalida();}
+				progress = true;
+			}
+
+			catch(OpcaoInvalida)
+			{
+				std::cout << "Inseriu uma opção inválida, por favor tente outra vez." << std::endl;
+				progress = false;
+			}
+		}while(progress == false);
+		switch(option)
+		{
+		case 'a':
+		{
+			std::cout << "Insira o valor do salario." << std::endl;
+			std::cin >> salario;
+			std::cout << "Insira o nome do funcionario." << std::endl;
+			std::cin.ignore();
+			std::getline(std::cin, nome);
+			std::cout << "Insira a localização do posto de venda." << std::endl;
+			std::getline(std::cin, loc);
+			index = vectorSearchPosto(loc, postos);
+			if(index == -1)
+			{
+				std::cout << "Não há postos nesta localizacao." << std::endl;
+			}
+			else
+			{
+				funcionarios.insert(Funcionario(salario, nome, &(postos->at(index))));
+			}
+			break;
+		}
+		case 'r':
+		{
+			std::cout << "Insira o valor do salario." << std::endl;
+			std::cin >> salario;
+			std::cout << "Insira o nome do funcionario." << std::endl;
+			std::cin.ignore();
+			std::getline(std::cin, nome);
+			funcionarios.remove(Funcionario(salario, nome, NULL));
+			break;
+		}
+		case 'p':
+		{
+			funcionarios.printTree();
+			break;
+		}
+		case 'v':
+		{
+			exit = true;
+			break;
+		}
+		default:
+		{
+			break;
+		}
+		}
+	}while(exit == false);
+}
+
+void gereComposicoes(priority_queue<Composicao> * composicoes)
+{
+	char option;
+		bool progress = false, exit = false;
+		int index, id, dias;
+		bool avaria;
+		char avaria_in;
+		do
+		{
+			do
+			{
+				try
+				{
+					std::cout << std::endl << "Escolha uma opção:" << std::endl;
+					std::cout << "Para adicionar uma composição escreva 'a'." << std::endl;
+					std::cout << "Para remover uma composição escreva 'r'." << std::endl;
+					std::cout << "Para imprimir a lista de Composições escreva 'p'." << std::endl;
+					std::cout << "Para decrementar o número de dias restantes para a próxima manutenção escreva 'd'." << std::endl;
+					std::cout << "Para efetuar uma manutenção da composição no topo da fila escreva 'm'." << std::endl;
+					std::cout << "Para voltar ao menu inicial escreva 'v'." << std::endl;
+					std::cin >> option;
+
+					if(option != 'a' && option != 'r' && option != 'p' && option != 'd' && option != 'm' && option != 'v')
+					{throw OpcaoInvalida();}
+					progress = true;
+				}
+
+				catch(OpcaoInvalida)
+				{
+					std::cout << "Inseriu uma opção inválida, por favor tente outra vez." << std::endl;
+					progress = false;
+				}
+			}while(progress == false);
+			switch(option)
+			{
+			case 'a':
+			{
+				std::cout << "Insira o número identificativo da composição." << std::endl;
+				std::cin >> id;
+				std::cout << "Insira o número de dias até à próxima manutenção." << std::endl;
+				std::cin >> dias;
+				std::cout << "Indique se a composição está avariada.('s' caso sim, qualquer outra tecla caso não)" << std::endl;
+				std::cin >> avaria_in;
+				if(avaria_in == 's')
+					avaria = true;
+				else
+					avaria = false;
+				composicoes->push(Composicao(dias, avaria, id));
+				break;
+			}
+			case 'r':
+			{
+				std::cout << "Insira o número identificativo da composição." << std::endl;
+				std::cin >> id;
+				vector<Composicao> temp;
+				Composicao temp2(0, false, id);
+				while(!(composicoes->empty()))
+				{
+					temp.push_back(composicoes->top());
+					composicoes->pop();
+				};
+				for(int i = 0; i < temp.size(); i++)
+				{
+					if(temp.at(i) == temp2)
+					{
+						temp.erase(temp.begin()+i);
+						break;
+					}
+				}
+				for(int i = 0; i < temp.size(); i++)
+				{
+					composicoes->push(temp.at(i));
+				}
+				break;
+			}
+			case 'p':
+			{
+				vector<Composicao> temp;
+				while(!(composicoes->empty()))
+				{
+					temp.push_back(composicoes->top());
+					composicoes->pop();
+				};
+				for(int i = 0; i < temp.size(); i++)
+				{
+					temp.at(i).print();
+					composicoes->push(temp.at(i));
+				}
+				break;
+			}
+			case 'd':
+			{
+				vector<Composicao> temp;
+				while(!(composicoes->empty()))
+				{
+					temp.push_back(composicoes->top());
+					composicoes->pop();
+				};
+				for(int i = 0; i < temp.size(); i++)
+				{
+					temp.at(i).decDias();
+					composicoes->push(temp.at(i));
+				}
+				break;
+			}
+			case 'm':
+			{
+				if((composicoes->top().getAvaria() && composicoes->top().getProxManut() < 10) || (!(composicoes->top().getAvaria()) && composicoes->top().getProxManut() == 0))
+				{
+					Composicao temp = composicoes->top();
+					composicoes->pop();
+					temp.efetuaManutencao();
+					composicoes->push(temp);
+				}
+				else
+					std::cout << "Manutenção desnecessária." << std::endl;
+				break;
+			}
+			case 'v':
+			{
+				exit = true;
+				break;
+			}
+			default:
+			{
+				break;
+			}
+			}
+		}while(exit == false);
+	}
+}
 
 
 /**
@@ -961,11 +1177,13 @@ void mainMenu()
 				std::cout << std::endl << "Escolha uma opção:" << std::endl;
 				std::cout << "Para adicionar postos ou maquinas escreva 'a'." << std::endl;
 				std::cout << "Para procurar um posto ou maquina escreva 'p'." << std::endl;
+				std::cout << "Para gerir funcionários escreva 'f'." << std::endl;
+				std::cout << "Para gerir composições escreva 'c'." << std::endl;
 				std::cout << "Para guardar a informaçao escreva 'g'." << std::endl;
 				std::cout << "Para sair escreva 's'." << std::endl;
 				std::cin >> option;
 
-				if(option != 'a' && option != 'p' && option != 'g' && option != 's')
+				if(option != 'a' && option != 'p' && option != 'f' && option != 'c' && option != 'g' && option != 's')
 				{throw OpcaoInvalida();}
 				progress = true;
 			}
@@ -987,6 +1205,16 @@ void mainMenu()
 		case 'p':
 		{
 			procuraPosto(&postos, &maquinas);
+			break;
+		}
+		case 'f':
+		{
+			gereFuncionarios(&postos);
+			break;
+		}
+		case 'c':
+		{
+			gereComposicoes(&composicoes);
 			break;
 		}
 		case 'g':{
